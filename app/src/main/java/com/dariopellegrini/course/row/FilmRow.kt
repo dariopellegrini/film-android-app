@@ -13,7 +13,7 @@ class FilmRow(val film: Film, val click: () -> Unit): Row {
     override val configuration: ((View, Int) -> Unit) = {
         itemView, position ->
 
-        itemView.titleTextView.text = film.name
+        itemView.titleRowTextView.text = film.name
         Glide.with(itemView).load(film.image.medium).into(itemView.imageView)
 
         itemView.setOnClickListener {
