@@ -13,6 +13,8 @@ import com.dariopellegrini.storagedone.get
 import com.dariopellegrini.storagedone.insertOrUpdate
 import com.dariopellegrini.storagedone.query.and
 import com.dariopellegrini.storagedone.query.equal
+import com.dariopellegrini.storagedone.sorting.ascending
+import com.dariopellegrini.storagedone.sorting.descending
 import com.dariopellegrini.storagedone.suspending
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.coroutines.CoroutineScope
@@ -74,7 +76,15 @@ class FilmDetailActivity : AppCompatActivity() {
     }
 
     private suspend fun isStarred(id: Int): Boolean {
-        val favourites = DatabaseRepository.database.suspending.get<Film>(and("id" equal id, "starred" equal true))
+        val favourites = DatabaseRepository.database.suspending.get<Film> {
+            expression = and(
+                "id" equal id,
+                "starred" equal true
+            )
+//            orderings = arrayOf("runtime".descending, "id".ascending)
+//            limit = 10
+//            skip = 20
+        }
         return favourites.isNotEmpty()
     }
 }
