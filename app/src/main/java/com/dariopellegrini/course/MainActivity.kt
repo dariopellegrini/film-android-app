@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 DatabaseRepository.database.suspending.insertOrUpdate(person1)
                 database.suspending.insertOrUpdate(person2)
                 database.suspending.insertOrUpdate(person3)
-                val people: List<Person> = database.suspending.get("starred" equal true)
+                val people: List<Person> = database.suspending.get("configuration.name" equal true)
                 println(people)
             } catch (e: Exception) {
                 println(e)
